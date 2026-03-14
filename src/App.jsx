@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import WeatherCard from "./components/WeatherCard/WeatherCard";
+import NavBar from "./components/NavBar/NavBar";
 import "./App.css";
 
 // Funcionalidad Core	Permitir la búsqueda de clima por nombre de ciudad.
@@ -25,13 +26,19 @@ function App() {
   const fetchWeather = async () => {
     //We set loading to because we still dont have the needed data.
     setLoading(true);
+    setError(false);
     try {
+      //We wait for the returned promise
       const response = await fetch(URL);
+      //If something goes wrong, we throw an error
       if (!response.ok) throw new Error("City not found!");
+      //If everything goes right we wait till the promise is resolved
       const data = await response.json();
+      //Promise is resolved and now we can use the data because is not a json
       console.log(data);
       setWeather(data);
       localStorage.setItem("lastCity", city);
+      //If there was an error before, catch will take it and the code inside will run
     } catch (error) {
       console.error("Error:", error);
       setError(true);
@@ -40,14 +47,16 @@ function App() {
     }
   };
 
-  //This will be triggered every time we search a city and save it into the state
+  //This will be triggered when we first open the app (no cities in local storage)
   useEffect(() => {
     fetchWeather();
-  }, []);
+  }, [city]);
 
   return (
     <>
+      <NavBar searchCity={setCity}></NavBar>
       {loading && <p>Cargando...</p>}
+      {error && <p>Ciudad no encontrada!</p>}
       {weather && <WeatherCard weatherData={weather} />}
     </>
   );

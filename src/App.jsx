@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import WeatherCard from "./components/WeatherCard/WeatherCard";
-import NavBar from "./components/NavBar/NavBar";
+import CurrentWeather from "./components/MainContent/CurrentWeather";
 import "./App.css";
+import SearchBar from "./components/MainContent/SearchBar";
 
 // Funcionalidad Core	Permitir la búsqueda de clima por nombre de ciudad.
 // Integración	Consumir datos reales de la API de OpenWeatherMap.
@@ -54,10 +54,10 @@ function App() {
 
   return (
     <>
-      <NavBar searchCity={setCity}></NavBar>
-      {loading && <p>Cargando...</p>}
-      {error && <p>Ciudad no encontrada!</p>}
-      {weather && <WeatherCard weatherData={weather} />}
+      {loading && <p>Loading...</p>}
+      {error && <p>City not found!</p>}
+      <SearchBar searchCity={setCity} />
+      {weather && <CurrentWeather weatherData={weather} />}
     </>
   );
 }

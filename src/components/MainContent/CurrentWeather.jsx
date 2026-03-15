@@ -1,4 +1,4 @@
-const WeatherCard = ({ weatherData }) => {
+const CurrentWeather = ({ weatherData }) => {
   return (
     <div className="weather-card">
       <div className="city-name">{weatherData.address}</div>
@@ -7,4 +7,4 @@ const WeatherCard = ({ weatherData }) => {
   );
 };
 
-export default WeatherCard;
+export default CurrentWeather;

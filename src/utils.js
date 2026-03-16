@@ -29,3 +29,16 @@ export const getWeatherIcon = (apiIcon) => {
 
   return icons.cloudy;
 };
+
+export const capitalizeCityName = (cityName) => {
+  if (!cityName) return "";
+
+  return cityName
+    .trim()
+    .split(" ")
+    .filter((word) => word.length > 0)
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
+};

@@ -6,7 +6,7 @@ const SearchBar = ({ searchCity }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          searchCity(inputValue.charAt(0).toUpperCase() + inputValue.slice(1));
+          searchCity(inputValue);
           setInputValue("");
         }}
       >
@@ -20,7 +20,7 @@ const SearchBar = ({ searchCity }) => {
             setInputValue(e.target.value);
           }}
         />
-        <button>Search</button>
+        <button className="search-btn">Search</button>
       </form>
     </>
   );

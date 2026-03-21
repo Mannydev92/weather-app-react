@@ -3,6 +3,7 @@ import CurrentWeather from "./components/MainContent/CurrentWeather";
 import TodayForecast from "./components/MainContent/HourlyForecast/TodayForecast";
 import "./App.css";
 import SearchBar from "./components/MainContent/SearchBar";
+import AirConditions from "./components/MainContent/AirConditions";
 
 function App() {
   const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
@@ -13,7 +14,6 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [now, setNow] = useState(Date.now());
 
   const URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/?unitGroup=metric&key=${API_KEY}`;
 
@@ -43,17 +43,22 @@ function App() {
 
   //This will be triggered when we first open the app (no cities in local storage)
   useEffect(() => {
-    setNow(Date.now());
     fetchWeather();
   }, [city]);
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
+
   return (
     <>
-      {loading && <p>Loading...</p>}
-      {error && <p>City not found!</p>}
       <SearchBar searchCity={setCity} />
-      {weather && <CurrentWeather weatherData={weather} />}
-      {weather && <TodayForecast weather={weather} now={now} />}
+      {weather && (
+        <>
+          <CurrentWeather weatherData={weather} />
+          <TodayForecast weather={weather} />
+          <AirConditions weatherData={weather} />
+        </>
+      )}
     </>
   );
 }

@@ -42,3 +42,15 @@ export const capitalizeCityName = (cityName) => {
     })
     .join(" ");
 };
+
+export const formatWeatherDatetime = (weather) => {
+  const splitDateTime = weather.datetime.split(":");
+  if (splitDateTime[0] > 0 && splitDateTime[0] < 12) {
+    splitDateTime[2] = "AM";
+  } else if (splitDateTime[0] === "00") {
+    splitDateTime[2] = "";
+  } else {
+    splitDateTime[2] = "PM";
+  }
+  return splitDateTime[0] + ":" + splitDateTime[1] + " " + splitDateTime[2];
+};

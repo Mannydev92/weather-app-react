@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  /* Definimos los dos colores clave del diseño */
+  --color-main-bg: #0b0f14; /* Fondo del body (oscuro total) */
+  --color-card-bg: #1a1f26; /* Fondo de las cajas (un pelín más claro) */
+}
+
+/* Aplicación global */
+body {
+  background-color: var(--color-main-bg);
+  color: white;
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

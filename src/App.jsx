@@ -4,6 +4,7 @@ import TodayForecast from "./components/MainContent/HourlyForecast/TodayForecast
 import "./App.css";
 import SearchBar from "./components/MainContent/SearchBar";
 import AirConditions from "./components/MainContent/AirConditions";
+import ForecastSidebar from "./components/RightPanel/ForecastSidebar";
 
 function App() {
   const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
@@ -50,16 +51,25 @@ function App() {
   if (error) return <p>Error!</p>;
 
   return (
-    <>
-      <SearchBar searchCity={setCity} />
+    <div className="flex gap-8 max-w-7xl mx-auto p-8 min-h-screen">
+      <main className="flex-1 min-w-0 flex flex-col gap-6">
+        <SearchBar searchCity={setCity} />
+
+        {weather && (
+          <>
+            <CurrentWeather weatherData={weather} />
+            <TodayForecast weather={weather} />
+            <AirConditions weatherData={weather} />
+          </>
+        )}
+      </main>
+
       {weather && (
-        <>
-          <CurrentWeather weatherData={weather} />
-          <TodayForecast weather={weather} />
-          <AirConditions weatherData={weather} />
-        </>
+        <aside className="w-[300px] flex flex-col">
+          <ForecastSidebar weather={weather} />
+        </aside>
       )}
-    </>
+    </div>
   );
 }
 

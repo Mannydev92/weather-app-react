@@ -2,25 +2,23 @@ import { getWeatherIcon, formatWeatherDatetime } from "../../../utils.js";
 
 const HourlyForecastItem = ({ weather }) => {
   return (
-    <div className="flex flex-col items-center min-w-[90px] gap-3 border-r border-slate-700/50 last:border-none px-4 group hover:bg-slate-800/30 transition-colors rounded-xl py-2">
-      {/* Hora */}
-      <div className="text-slate-400 text-xs font-medium uppercase">
+    /* FLEX-SHRINK-0: ¡ESTA ES LA CLAVE! Evita que el contenedor aplaste el item.
+       MIN-W-[90px]: Le damos un ancho mínimo para que siempre se vea bien.
+    */
+    <div className="flex flex-col items-center justify-center flex-shrink-0 min-w-[90px] py-4 border-r border-slate-700/30 last:border-none">
+      <span className="text-slate-400 text-[11px] font-medium uppercase mb-3">
         {formatWeatherDatetime(weather)}
-      </div>
+      </span>
 
-      {/* Icono - Ajustado para que no "baile" */}
-      <div className="h-12 w-12 flex items-center justify-center">
-        <img
-          src={`src/assets/weather-icons/${getWeatherIcon(weather.icon)}`}
-          alt="icon"
-          className="w-10 h-10 object-contain drop-shadow-md group-hover:scale-110 transition-transform"
-        />
-      </div>
+      <img
+        src={`src/assets/weather-icons/${getWeatherIcon(weather.icon)}`}
+        className="w-10 h-10 object-contain mb-3"
+        alt="weather icon"
+      />
 
-      {/* Temperatura */}
-      <div className="text-xl font-bold text-white">
+      <span className="text-xl font-bold text-white">
         {Math.round(weather.temp)}°
-      </div>
+      </span>
     </div>
   );
 };

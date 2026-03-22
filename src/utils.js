@@ -30,6 +30,15 @@ export const getWeatherIcon = (apiIcon) => {
   return icons.cloudy;
 };
 
+export const getWeatherDescription = (description) => {
+  if (description.includes("clear")) return "Sunny";
+  if (description.includes("cloud")) return "Cloudy";
+  if (description.includes("rain")) return "Rainy";
+  if (description.includes("snow")) return "Snow";
+  if (description.includes("thunder")) return "Storm";
+  if (description.includes("wind")) return "Windy";
+};
+
 export const capitalizeCityName = (cityName) => {
   if (!cityName) return "";
 
@@ -53,4 +62,28 @@ export const formatWeatherDatetime = (weather) => {
     splitDateTime[2] = "PM";
   }
   return splitDateTime[0] + ":" + splitDateTime[1] + " " + splitDateTime[2];
+};
+
+export const getDayOfTheWeek = (dateString) => {
+  // .toISOString() nos da "2026-03-22T..." y con .split('T')[0] nos quedamos solo con la fecha.
+  const todayDateString = new Date().toISOString().split("T")[0];
+
+  // 2. Si el string que recibimos es exactamente igual al de hoy, devolvemos "Today"
+  if (dateString === todayDateString) {
+    return "Today";
+  }
+
+  const date = new Date(dateString);
+  const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const dayIndex = date.getDay();
+  return daysOfWeek[dayIndex];
 };

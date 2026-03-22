@@ -14,3 +14,25 @@ body {
   font-family: ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* 1. Definimos el tamaño de la barra (solo la horizontal) */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px; /* Una barra finita es más elegante */
+}
+
+/* 2. El "Track" (el carril por el que se mueve) */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #0b0f14; /* El mismo color que tu body */
+  border-radius: 10px;
+}
+
+/* 3. El "Thumb" (la pieza que arrastras) */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #334155; /* Un gris azulado (slate-700) */
+  border-radius: 10px;
+}
+
+/* 4. Efecto al pasar el ratón por encima */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #475569; /* Un poco más claro al tocarla */
+}

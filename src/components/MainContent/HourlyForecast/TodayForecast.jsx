@@ -18,7 +18,7 @@ const TodayForecast = ({ weather }) => {
       <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-6 ml-2">
         TODAY'S FORECAST
       </div>
-      <div className="flex overflow-x-auto pb-4 gap-2 scrollbar-hide">
+      <div className="flex overflow-x-auto flex-nowrap gap-2 pb-4 scroll-smooth custom-scrollbar">
         {todayHours.map((hour) => (
           <HourlyForecastItem
             key={hour.datetimeEpoch}
